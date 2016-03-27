@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require('path');
 
-
 function copy(src,dest){
 
   var srcStat = fs.lstatSync(src);

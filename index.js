@@ -5,7 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var sync = require('./sync');
+var copy = require('./copy');
 
 var argv = process.argv.slice(2);
 //游戏名字
@@ -13,7 +13,7 @@ var gameName = argv[0];
 //当前目录文件夹
 var cwd = process.cwd();
 
-sync(
+copy(
   path.resolve(__dirname,'./template'),
   path.resolve(cwd,gameName)
 );
