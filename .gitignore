@@ -64,6 +64,8 @@ public/js/API.js
 
 public/basic
 
+template/src/sprites
+
 *.png
 
 *.json
