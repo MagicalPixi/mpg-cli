@@ -17,7 +17,7 @@ var cwd = process.cwd();
 
 var gameDir = path.resolve(cwd,gameName);
 //git init shell
-var gitInitSh = path.resolve(__dirname,'.gitInit');
+var gitInitSh = path.resolve(__dirname,'gitInit.sh');
 
 copy(
   path.resolve(__dirname,'./template'),
