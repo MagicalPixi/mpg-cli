@@ -1,7 +1,4 @@
-#!/usr/local/bin/node node
-/**
- * Created by zyg on 16/3/21.
- */
+#!/usr/local/bin/node
 var fs = require('fs');
 var path = require('path');
 
