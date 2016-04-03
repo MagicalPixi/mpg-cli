@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server --content-base . --hot --inline --port 7001 --display-error-details"
   },
   "author": "",
   "license": "ISC",
@@ -18,5 +19,19 @@
     "gulp-util": "^3.0.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
+  },
+  "resources": [
+    "sheren"
+  ],
+  "scenes": {
+    "start": [
+      "boom",
+      "fuck_him"
+    ]
+  },
+  "permission":{
+  },
+  "dependencies": {
+    "ejs": "^2.4.1"
   }
 }

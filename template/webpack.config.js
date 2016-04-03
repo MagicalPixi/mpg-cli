@@ -24,9 +24,9 @@ module.exports = {
     main:'./src/index.js'
   },
   output: {
-    path: path.resolve(__dirname, './public/dist'),
-    publicPath: "/public/dist",
-    filename: 'main.js'
+    path: path.resolve(__dirname, './dist'),
+    publicPath: "/dist/",
+    filename: 'dist.js'
   },
   module: {
     loaders: [

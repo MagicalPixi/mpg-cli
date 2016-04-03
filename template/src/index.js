@@ -1,41 +1,20 @@
 var pixiLib = require('pixi-lib');
 
-var renderer = new PIXI.autoDetectRenderer(640, 1004, {
-    transparent: true
-  }
-);
-
-document.body.appendChild(renderer.view);
-
-var rafI = 0;
-var render = function (currentStage) {
-
-  cancelAnimationFrame(rafI);
-
-  function animate() {
-
-    if (currentStage.render) {
-      currentStage.render();
-    }
-
-    currentStage.children.forEach(function (child) {
-      if (child.render) {
-        child.render();
-      }
-    });
-
-    renderer.render(currentStage);
-
-    rafI = requestAnimationFrame(animate);
-  }
-
-  animate();
-};
+var render = pixiLib.createRender(document.body);
 
 var scenesLoader = require.context('./scenes/');
 
-scenesLoader.keys().map(function (key, i) {
-  window['scene' + i] = function () {
-    scenesLoader(key)(renderer)
+console.log(scenesLoader.keys());
+
+scenesLoader.keys().filter(function(key){
+  return /index\.js/.test(key);
+}).map(function (key, i) {
+
+  var sceneStart = scenesLoader(key);
+
+  window['scene' + i] = function (render) {
+    sceneStart(render);
   }
 });
+
+window.scene0(render);

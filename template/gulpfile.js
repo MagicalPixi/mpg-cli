@@ -6,8 +6,12 @@ var gutil = require('gulp-util');
 
 
 var tasksPath = path.resolve(__dirname,'./tasks/');
-var taskList = fs.readdirSync(tasksPath).forEach(function(taskName){
-  var taskFn = require(path.resolve(tasksPath,taskName));
+var taskList = fs.readdirSync(tasksPath).map(function (taskName) {
+  return path.resolve(tasksPath,taskName)
+}).filter(function (p) {
+  return !fs.lstatSync(p).isDirectory();
+}).forEach(function(p){
+  var taskFn = require(p);
   taskFn(gulp);
 });
 
