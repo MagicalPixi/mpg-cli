@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/local/bin/node node
 /**
  * Created by zyg on 16/3/21.
  */
