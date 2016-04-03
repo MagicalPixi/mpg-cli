@@ -4,8 +4,6 @@ var render = pixiLib.createRender(document.body);
 
 var scenesLoader = require.context('./scenes/');
 
-console.log(scenesLoader.keys());
-
 scenesLoader.keys().filter(function(key){
   return /index\.js/.test(key);
 }).map(function (key, i) {
