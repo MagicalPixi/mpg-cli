@@ -18,7 +18,7 @@ function existJsonInDir(dirPath){
 }
 
 
-module.exports = function (sceneDir,sceneName,sceneSpriteDir,sceneResourceNames){
+module.exports = function (sceneDir,sceneResourceDirs,withScenePre){
 
   var indexFilePath = path.join(sceneDir,sceneIndexFileName);
   var addResourceFilePath = path.join(sceneDir,addResourceFileName);
@@ -34,19 +34,19 @@ module.exports = function (sceneDir,sceneName,sceneSpriteDir,sceneResourceNames)
   var png = [];
   var json = [];
 
-  sceneResourceNames.map(function (resourceName) {
-    return path.join(sceneSpriteDir,resourceName);
-  }).map(function (resourceDir,i) {
+  sceneResourceDirs.map(function (resourceDir,i) {
+    var spriteName = path.parse(resourceDir).name;
 
     if(existJsonInDir(resourceDir)){
-      json.push(sceneResourceNames[i]);
+      json.push(spriteName);
     }else{
-      png.push(sceneResourceNames[i]);
+      png.push(spriteName);
     }
   });
 
-
   fs.writeFileSync(addResourceFilePath,addResourceFn({
-    png,json
+    png,
+    json,
+    sceneTitle:withScenePre
   }));
 };

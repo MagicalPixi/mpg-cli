@@ -42,25 +42,33 @@ module.exports = function (gulp) {
     Object.keys(scenes).map(function (sceneName) {
 
       var sceneDir = path.join(scenesDir,sceneName);
-      var sceneResources = scenes[sceneName];
+      var sceneResources = scenes[sceneName].map(function (name) {
+        return path.join(saveSpritesDir,name);
+      });
 
-      sceneBuild(sceneDir,sceneName,saveSpritesDir,sceneResources)
+      sceneBuild(sceneDir,sceneResources)
     });
   });
 
-  gulp.task('sceneEdit-down',['scene-before'],function () {
+  //--------------------------//
 
+
+  gulp.task('sceneEdit-down',['scene-before'],function () {
     var sceneDownUrls = scenesEdit.map(sceneName=>{
       return `${server}/api/sceneDownload?sceneTitle=${encodeURIComponent(sceneName)}`
     });
 
     return downloadZip(gulp,sceneDownUrls,saveSpritesDir,scenesEdit)
   });
-
   gulp.task('sceneEdit',['sceneEdit-down'], function () {
 
+    //场景文件夹
     var sceneSpriteDirs = [];
 
+    //二维数组
+    var sceneSpriteNamesArr = [];
+
+    //下载，解压，再解压。
     Promise.all(scenesEdit.map(sceneName=>{
       var sceneCwd = path.join(saveSpritesDir,sceneName);
       var sceneZipFile = path.join(sceneCwd,`${sceneName}.zip`);
@@ -78,17 +86,37 @@ module.exports = function (gulp) {
       }));
     }).then(function () {
 
-      sceneSpriteDirs.map(sceneSpriteDir=>{
+      return Promise.all(sceneSpriteDirs.map(sceneSpriteDir=>{
+        return fs.readdirSync(sceneSpriteDir).filter(function (file) {
 
-        fs.readdirSync(sceneSpriteDir).filter(function (file) {
           return /\.zip$/.test(file);
         }).map(function (zipFile) {
 
-          zipFile = path.join(sceneSpriteDir,zipFile);
-
-          unzipDonwload(zipFile,true);
+          return path.join(sceneSpriteDir,zipFile);
         });
+      }).reduce(function(preFiles,nextFiles){
+
+        sceneSpriteNamesArr.push(nextFiles.map(file=>path.parse(file).name));
+
+        return preFiles.concat(nextFiles);
+      },[]).map(function (zipFile) {
+
+        return unzipDonwload(zipFile,true);
+      }));
+    }).then(function(){
+      //全部解压完毕
+      scenesEdit.map((sceneName,i)=>{
+
+        var targetSceneDir = path.join(scenesDir,sceneName);
+
+        var sceneSpriteDir = path.join(saveSpritesDir,sceneName);
+
+        var sceneSpriteNameDirs = sceneSpriteNamesArr[i].map(function (spriteName) {
+          return path.join(sceneSpriteDir,spriteName)
+        });
+
+        sceneBuild(targetSceneDir,sceneSpriteNameDirs,sceneName);
       });
-    });
+    }).catch(console.log.bind(console));
   });
 };
