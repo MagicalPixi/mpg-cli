@@ -20,9 +20,16 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
+    "fuck_him"
   ],
   "scenes": {
+    "helx":[
+      "fuck_him"
+    ]
   },
+  "scenesEdit":[
+
+  ],
   "permission":{
   },
   "dependencies": {
