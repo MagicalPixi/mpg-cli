@@ -10,7 +10,6 @@ var unzip = require('gulp-unzip');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 
-
 var downloadZip = require('./lib/downloadZip');
 var unzipDownload = require('./lib/unzipDownload');
 
@@ -72,9 +71,9 @@ module.exports = function (gulp) {
   //解压
   gulp.task('down',['down-ing'], function () {
     downloadMaterialNames.map(function (name) {
-      var cwd = path.join(saveSpritesDir,name);
+      var zipFile = path.join(saveSpritesDir,name,name);
 
-      return  unzipDownload(cwd,name);
+      return  unzipDownload(zipFile);
     });
   });
 };

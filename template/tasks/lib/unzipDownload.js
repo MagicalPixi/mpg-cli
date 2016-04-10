@@ -13,13 +13,26 @@ var filesInZip = [
   '*.png'
 ];
 
-module.exports = function(cwd,name){
+//module.exports = function(cwd,name,withSprite,dest){
+module.exports = function(zipFile,withDirectory){
+  console.log(zipFile);
 
-  var indexJs = path.join(cwd,'index.js');
+  var fileObj = path.parse(zipFile);
+
+  if(withDirectory){
+    dest = fileObj.name;
+  }else{
+    dest = '.';
+  }
+  var cwd = fileObj.dir;
+
+  var indexJs = path.join(dest,'index.js');
 
   var args = [
+    '-d',
+    dest,
     '-o',
-    name+'.zip',
+    fileObj.base
   ];
 
   if(fs.existsSync(indexJs)){
@@ -27,8 +40,6 @@ module.exports = function(cwd,name){
   }
 
   return new Promise(function (resolve) {
-
-    console.log(cwd,name);
 
     var unzip = spawn('unzip',args,{
       cwd:cwd
@@ -46,5 +57,4 @@ module.exports = function(cwd,name){
       resolve();
     });
   });
-
-}
+};
