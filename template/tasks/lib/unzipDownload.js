@@ -26,7 +26,7 @@ module.exports = function(zipFile,withDirectory){
   }
   var cwd = fileObj.dir;
 
-  var indexJs = path.join(dest,'index.js');
+  var indexJs = path.join(cwd,dest,'index.js');
 
   var args = [
     '-d',
