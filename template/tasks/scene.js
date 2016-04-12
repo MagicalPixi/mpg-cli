@@ -10,6 +10,8 @@ var unzipDonwload = require('./lib/unzipDownload');
 
 var sceneBuild = require('./lib/sceneBuild');
 
+var __DEBUG__ = require('./env').__DEBUG__;
+
 var packageJsonPath = path.resolve(__dirname,'../package.json');
 
 var scenesDir = path.resolve(__dirname,'../src/scenes/');
@@ -22,7 +24,7 @@ if(!fs.existsSync(saveSpritesDir)){
   fs.mkdirSync(saveSpritesDir);
 }
 
-var server = 'http://localhost:1414';//http://www.magicalpixi.com/
+var server = __DEBUG__ ? 'http://localhost:1414' : '//http://www.magicalpixi.com/';
 
 
 module.exports = function (gulp) {

@@ -10,12 +10,14 @@ var unzip = require('gulp-unzip');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 
+var __DEBUG__ = require('./env').__DEBUG__;
+
 var downloadZip = require('./lib/downloadZip');
 var unzipDownload = require('./lib/unzipDownload');
 
 var packageJsonPath = path.resolve(__dirname,'../package.json');
 
-var server = 'http://localhost:1414/';//http://www.magicalpixi.com/
+var server = __DEBUG__ ? 'http://localhost:1414/' :  'http://www.magicalpixi.com/';
 //资源名字
 var downloadMaterialNames = [];
 //var downloadMaterialNames = [
