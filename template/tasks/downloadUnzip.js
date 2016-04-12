@@ -10,7 +10,7 @@ var unzip = require('gulp-unzip');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 
-var __DEBUG__ = require('./env').__DEBUG__;
+var __DEBUG__ = require('./../env').__DEBUG__;
 
 var downloadZip = require('./lib/downloadZip');
 var unzipDownload = require('./lib/unzipDownload');
