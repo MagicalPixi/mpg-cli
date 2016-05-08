@@ -1,14 +1,21 @@
 {
-  "name": "mpg-cli",
-  "version": "1.4.8",
+  "name": "@linclark/mpg-cli",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "mpg-cli": "bin/index.js"
+  },
+  "dependencies": {
+    "commander": "^2.9.0",
+    "install": "^0.7.3",
+    "npm": "^3.8.9",
+    "shelljs": "^0.7.0"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "bin":{
-    "mpg-cli":"./index.js"
-  },
+  "author": "centuryguo",
   "license": "ISC"
 }
