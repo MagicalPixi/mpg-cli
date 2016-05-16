@@ -1,6 +1,6 @@
 {
-  "name": "@linclark/mpg-cli",
-  "version": "1.0.0",
+  "name": "mpg-cli",
+  "version": "1.4.9",
   "description": "",
   "main": "index.js",
   "bin": {
