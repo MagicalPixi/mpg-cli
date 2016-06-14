@@ -1,10 +1,10 @@
 {
   "name": "mpg-cli",
-  "version": "1.4.11",
+  "version": "1.4.12",
   "description": "",
   "main": "index.js",
   "bin": {
-    "mpg-cli": "bin/index.js"
+    "mpg-cli": "index.js"
   },
   "dependencies": {
     "commander": "^2.9.0",
