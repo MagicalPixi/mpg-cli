@@ -6,15 +6,26 @@ var webpack = require('webpack');
 
 var basic = require('./webpack.config');
 
-basic.plugins = [
-  new webpack.DefinePlugin({
-    __DEBUG__:false
-  }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: false
-    }
-  })
-];
+
+Object.assign(basic, {
+
+  plugins: [
+    new webpack.DefinePlugin({
+      __DEBUG__: false
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ],
+
+  output: {
+    path: path.resolve(__dirname, './js'),
+    publicPath: "/js/",
+    filename: 'index.js'
+  },
+  devtool:false
+})
 
 module.exports = basic;
