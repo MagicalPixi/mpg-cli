@@ -20,7 +20,6 @@
     "webpack-dev-server": "^1.14.1"
   },
   "resources": [
-    "fuck_him"
   ],
   "scenes": {
   },
@@ -28,7 +27,6 @@
   ],
   "permission": {},
   "dependencies": {
-    "ejs": "^2.4.1",
-    "pixi-lib": "^1.12.10"
+    "pixi-lib": "^x.x.x"
   }
 }
